@@ -33,20 +33,22 @@ class Fracao:
 
         if ( denominadoresSaoDiferentes ):
             denominadorComum = lcm(self.denominador, fracao.denominador)
-            numerador1Transformado = (denominadorComum / self.denominador) * self.denominador
-            numerador2Transformado = (denominadorComum / fracao.denominador) * fracao.denominador
+            numerador1Transformado = (denominadorComum / self.denominador) * self.numerador
+            numerador2Transformado = (denominadorComum / fracao.denominador) * fracao.numerador
             numerador = numerador1Transformado + numerador2Transformado
         
         return Fracao(numerador, denominadorComum)
     
     def subtraiFracao(self, fracao: Fracao) -> Fracao:
         """
-        >>> fracao1 = Fracao(10, 2)
-        >>> fracao2 = Fracao(5, 2)
+        >>> fracao1 = Fracao(10, 20)
+        >>> fracao2 = Fracao(5, 5)
         >>> fracao1.subtraiFracao(fracao2).retornaValorReal()
-        2.5
-        >>> fracao2.subtraiFracao(fracao1).retornaValorReal()
-        -2.5
+        -0.5
+        >>> fracao1.subtraiFracao(fracao2).numerador
+        -10.0
+        >>> fracao1.subtraiFracao(fracao1).denominador
+        20
         """
         denominadoresSaoDiferentes: bool = self.denominador != fracao.denominador
         numerador = self.numerador - fracao.numerador
@@ -54,8 +56,8 @@ class Fracao:
 
         if ( denominadoresSaoDiferentes ):
             denominadorComum = lcm(self.denominador, fracao.denominador)
-            numerador1Transformado = (denominadorComum / self.denominador) * self.denominador
-            numerador2Transformado = (denominadorComum / fracao.denominador) * fracao.denominador
+            numerador1Transformado = (denominadorComum / self.denominador) * self.numerador
+            numerador2Transformado = (denominadorComum / fracao.denominador) * fracao.numerador
             numerador = numerador1Transformado - numerador2Transformado
         
         return Fracao(numerador, denominadorComum)
