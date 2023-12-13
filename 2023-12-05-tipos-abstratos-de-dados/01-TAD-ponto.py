@@ -34,3 +34,6 @@ class Ponto:
         diffDeY1AteY2AoQuadrado = pow(self.y - ponto.y, 2)
 
         return sqrt(diffDeX1AteX2AoQuadrado + diffDeY1AteY2AoQuadrado)
+    
+    def __str__(self) -> str:
+        return f"Ponto(\n   X: {self.x}, \n   Y: {self.y}\n)"
