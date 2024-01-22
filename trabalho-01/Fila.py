@@ -1,12 +1,8 @@
 from __future__ import annotations
 from copy import deepcopy
-from dataclasses import dataclass
+from Cliente import Cliente
 
 from Vetor import Vetor
-
-@dataclass
-class Item:
-    valor: str
 
 class Fila():
 
@@ -18,34 +14,12 @@ class Fila():
         self.quantidadeElementos = 0
 
     def estaVazia(self) -> None:
-        """
-        >>> fila = Fila(2)
-        >>> fila.estaVazia()
-        True
-        >>> fila.enfileira(Item('A'))
-        >>> fila.estaVazia()
-        False
-        """
         return self.quantidadeElementos == 0
     
     def estaCheia(self) -> bool:
-        """
-        >>> fila = Fila(1)
-        >>> fila.estaCheia()
-        False
-        >>> fila.enfileira(Item('A'))
-        >>> fila.estaCheia()
-        True
-        """
         return self.quantidadeElementos == self.TAMANHO_MAXIMO
 
-    def enfileira(self, elemento: Item) -> None:
-        """
-        >>> fila = Fila(2)
-        >>> fila.enfileira(Item('a'))
-        >>> fila.estaVazia()
-        False
-        """
+    def enfileira(self, elemento: Cliente) -> None:
         if self.estaCheia():
             raise ValueError('Fila já está cheia')
 
@@ -53,16 +27,7 @@ class Fila():
         self.fim = self._avanca(self.fim)
         self.quantidadeElementos += 1
     
-    def desenfileira(self) -> Item:
-        """
-        >>> fila = Fila(1)
-        >>> fila.enfileira(Item('A'))
-        >>> fila.estaVazia()
-        False
-        >>> fila.desenfileira()
-        >>> fila.estaVazia()
-        True
-        """
+    def desenfileira(self) -> Cliente:
         if self.estaVazia():
             raise ValueError('Fila já está vazia')
         
@@ -72,13 +37,7 @@ class Fila():
 
         return elemento
 
-    def primeiroElemento(self) -> Item:
-        """
-        >>> fila = Fila(1)
-        >>> fila.enfileira(Item('A'))
-        >>> fila.primeiroElemento().valor
-        'A'
-        """
+    def primeiroElemento(self) -> Cliente:
         if self.estaVazia():
             raise ValueError('Fila já está vazia')
 
@@ -89,7 +48,8 @@ class Fila():
         i = self.inicio
 
         for k in range(self.quantidadeElementos):
-            print(self.elementos[i].valor, end='')
+            print(self.elementos[i].tipo, end='')
+            print(self.elementos[i].senha, end='')
             if k < self.quantidadeElementos - 1:
                 print(', ', end='')
 
@@ -97,15 +57,6 @@ class Fila():
         print('] <-- fim')
 
     def esvazia(self) -> None:
-        """
-        >>> fila = Fila(1)
-        >>> fila.enfileira(Item('A'))
-        >>> fila.estaVazia()
-        False
-        >>> fila.esvazia()
-        >>> fila.estaVazia()
-        True
-        """
         self.inicio = 0
         self.fim = 0
         self.quantidadeElementos = 0
