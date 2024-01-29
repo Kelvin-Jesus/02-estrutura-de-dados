@@ -44,17 +44,16 @@ class Fila():
         return deepcopy(self.elementos[self.inicio])
     
     def exibe(self) -> None:
-        print('Fila: inicio --> [', end='')
+        print('[', end=' ')
         i = self.inicio
 
         for k in range(self.quantidadeElementos):
-            print(self.elementos[i].tipo, end='')
             print(self.elementos[i].senha, end='')
             if k < self.quantidadeElementos - 1:
                 print(', ', end='')
 
             i = self._avanca(i)
-        print('] <-- fim')
+        print(' ]')
 
     def esvazia(self) -> None:
         self.inicio = 0

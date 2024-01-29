@@ -59,18 +59,33 @@ class SimuladorDeCaixa:
         caixa = self.caixas[numeroDoCaixa - 1]
         caixa.clienteAtual = clienteAtual
 
-        print(f"Chamando cliente com a senha:{clienteAtual.senha} para o caixa: {caixa.numero}", end="\n\n")
+        print(f"Chamando cliente com a senha: \"{clienteAtual.senha}\" para o caixa: {caixa.numero}", end="\n\n")
 
     def consultarClientesEmEspera(self) -> None:
-        print("Consultar clientes em espera")
+        print("\nClientes Preferenciais em espera:", end="\n")
+        filaPreferencial.exibe()
+        print("\n")
+
+        print("Clientes Comuns em espera:", end="\n")
+        filaComum.exibe()
+        print("\n")
 
     def consultarEstadoDosCaixas(self) -> None:
-        print("Consultar estado dos caixas")
+        for caixa in self.caixas:
+            print(f"Caixa {caixa.numero}: ", end="")
+
+            if caixa.clienteAtual == None:
+                print("Livre")
+            else:
+                print(f"Ocupado com o cliente de senha \"{caixa.clienteAtual.senha}\"")
+
+        print("\n")
 
     def sair(self) -> None:
-        print("Sair")
+        print("Simulador encerrado!")
 
 def printarOpcoes() -> None:
+    print("\n")
     print("="*50)
     print("Opções:\n")
     print("1 - Gerar Senha")
@@ -81,12 +96,12 @@ def printarOpcoes() -> None:
     print("="*50, end="\n")
 
 def iniciarSimulador(numeroDeCaixas: int) -> None:
-    printarOpcoes()
     opcaoAtual = None
 
     simulador = SimuladorDeCaixa(numeroDeCaixas)
 
-    while opcaoAtual != Opcao.SAIR.value:
+    while True:
+        printarOpcoes()
         opcaoAtual = int(input("Digite a opção desejada: "))
 
         if opcaoAtual == Opcao.GERAR_SENHA.value:
@@ -95,15 +110,17 @@ def iniciarSimulador(numeroDeCaixas: int) -> None:
             numeroDoCaixa = int(input("Digite o número do caixa: "))
             simulador.chamarCliente(numeroDoCaixa)
         elif opcaoAtual == Opcao.CONSULTAR_CLIENTES_EM_ESPERA.value:
-            print("Consultar clientes em espera")
+            simulador.consultarClientesEmEspera()
         elif opcaoAtual == Opcao.CONSULTAR_ESTADO_DOS_CAIXAS.value:
-            print("Consultar estado dos caixas")
+            simulador.consultarEstadoDosCaixas()
+        elif opcaoAtual == Opcao.SAIR.value:
+            simulador.sair()
+            break
         else:
             print("Opção inválida, tente novamente.\n")
-            printarOpcoes()
+            iniciarSimulador(numeroDeCaixas)
 
-
-numeroDeCaixas = int(input("Digite o número de caixas(entre 2 e 20): "))
+numeroDeCaixas = int(input("\nDigite o número de caixas(entre 2 e 20): "))
 
 if numeroDeCaixas >= 2 and numeroDeCaixas <= 20:
     iniciarSimulador(numeroDeCaixas)
