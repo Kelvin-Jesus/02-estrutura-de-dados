@@ -182,8 +182,8 @@ class ListaLigada:
         noAnterior = self.inicio
         noAtual = self.inicio.proximo
 
-        while noAntual != removido:
-            noAnterior = noAntual
+        while noAtual != noRemovido:
+            noAnterior = noAtual
             noAtual = noAtual.proximo
 
         noAnterior.proximo = noAtual.proximo
