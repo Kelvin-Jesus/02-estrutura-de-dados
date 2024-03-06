@@ -36,12 +36,22 @@ void insertAfter(Node* prevNode, int data) {
     Node* newNode = createEmptyNode();
     newNode->data = data;
 
+    printf("valor No anterior%d\n", prevNode->data);
+    printf("valor No proximo%d\n", prevNode->next->data);
     newNode->next = prevNode->next;
     prevNode->next = newNode;
     newNode->prev = prevNode;
 
+    printf("\nvalor No anterior%d\n", prevNode->data);
+    printf("valor atual%d\n", newNode->data);
+    printf("valor No proximo%d\n", newNode->next->data);
+
     if (newNode->next != NULL) 
         prevNode->next->prev = newNode;
+
+    printf("\nvalor No anterior%d\n", prevNode->data);
+    printf("valor atual%d\n", newNode->data);
+    printf("valor No proximo%d\n", newNode->next->data);
 }
 
 void insertEnd(Node** head, int data) {
@@ -60,6 +70,25 @@ void insertEnd(Node** head, int data) {
 
     newNode->prev = prevNode;
     prevNode->next = newNode;
+}
+
+void removeNode(Node** head, Node* nodeToDelete) {
+    if (*head == NULL || nodeToDelete == NULL) {
+        printf("Linked List is empty");
+        return;
+    }
+
+    if (*head == nodeToDelete) {
+        *head = nodeToDelete->next;
+    }
+
+    if (nodeToDelete->next != NULL) 
+        nodeToDelete->next->prev = nodeToDelete->prev;
+
+    if (nodeToDelete->prev != NULL)
+        nodeToDelete->prev->next = nodeToDelete->next;
+
+    free(nodeToDelete);
 }
 
 int main() {
@@ -114,6 +143,21 @@ int main() {
     nodeIterator = head;
     while (nodeIterator != NULL) {
         printf("%d\n", nodeIterator->data);
+        nodeIterator = nodeIterator->next;
+    }
+
+    // removeNode(&head, music03);
+
+    printf("\nRemove Node 3\n");
+    nodeIterator = head;
+    while (nodeIterator != NULL) {
+        printf("Nó Atual %d\n", nodeIterator->data);
+        if ( nodeIterator->prev != NULL)
+            printf("Nó Anterior %d\n", nodeIterator->prev->data);
+        if ( nodeIterator->next != NULL)
+            printf("Próximo Nó %d\n", nodeIterator->next->data);
+
+        printf("\n");
         nodeIterator = nodeIterator->next;
     }
 
