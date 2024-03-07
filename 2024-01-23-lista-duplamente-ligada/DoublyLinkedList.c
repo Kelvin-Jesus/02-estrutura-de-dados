@@ -36,22 +36,12 @@ void insertAfter(Node* prevNode, int data) {
     Node* newNode = createEmptyNode();
     newNode->data = data;
 
-    printf("valor No anterior%d\n", prevNode->data);
-    printf("valor No proximo%d\n", prevNode->next->data);
     newNode->next = prevNode->next;
     prevNode->next = newNode;
     newNode->prev = prevNode;
 
-    printf("\nvalor No anterior%d\n", prevNode->data);
-    printf("valor atual%d\n", newNode->data);
-    printf("valor No proximo%d\n", newNode->next->data);
-
     if (newNode->next != NULL) 
-        prevNode->next->prev = newNode;
-
-    printf("\nvalor No anterior%d\n", prevNode->data);
-    printf("valor atual%d\n", newNode->data);
-    printf("valor No proximo%d\n", newNode->next->data);
+        newNode->next->prev = newNode;
 }
 
 void insertEnd(Node** head, int data) {
@@ -146,7 +136,7 @@ int main() {
         nodeIterator = nodeIterator->next;
     }
 
-    // removeNode(&head, music03);
+    removeNode(&head, music03);
 
     printf("\nRemove Node 3\n");
     nodeIterator = head;
