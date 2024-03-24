@@ -43,8 +43,7 @@ class TabelaHashComSondagemLinear:
         self.totalDeElementos += 1
 
     def busca(self, chave: str) -> Item | None:
-        sobrenome: str = chave.upper()
-        indice: int = self._hash(sobrenome)
+        indice: int = self._hash(chave.upper)
 
         indiceInicial: int = indice
 
