@@ -21,12 +21,21 @@ Tree* newTree() {
     return tree;
 }
 
-bool isEmpty(Tree *tree) {
-   assert(tree != NULL);
-   if (tree->root == NULL)
-        return true;
+void destroy(Node *root) {
+    if (root != NULL){
+        destroy(root->leftNode);
+        destroy(root->rightNode);
+        free(root);
+    }
+}
 
-   return false;
+bool isEmpty(Tree *tree) {
+    assert(tree != NULL);
+    if (tree->root == NULL || tree->root == 0) {
+        return true;
+    }
+
+    return false;
 }
 
 Node* newNode(dataType data) {
@@ -63,7 +72,7 @@ int height(Node treeRoot) {
 }
 
 int main() {
-   Tree *tree = newTree();
+    Tree *tree = newTree();
     printf("%d\n", isEmpty(tree));
 
     tree->root = newNode(10);
@@ -73,9 +82,10 @@ int main() {
     insertLeft(tree, 50, tree->root->rightNode);
     insertLeft(tree, 5, tree->root);
 
-    printf("%d\n", tree->root->rightNode->data);
-    printf("%d\n", tree->root->leftNode->data);
-    printf("%d\n", tree->root->rightNode->leftNode->data);
+    destroy(tree->root);
+    if (isEmpty(tree)) {
+        printf("%s\n", "Árvore está vazia!");
+    }
 
     return 0;
 }
