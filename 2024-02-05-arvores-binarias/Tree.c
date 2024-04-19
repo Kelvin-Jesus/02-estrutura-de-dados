@@ -7,8 +7,7 @@ typedef int dataType;
 
 typedef struct Node {
     dataType data;
-    struct Node *leftNode;
-    struct Node *rightNode;
+    struct Node *leftNode, *rightNode;
 } Node;
 
 typedef struct {
