@@ -1,5 +1,5 @@
-#include<stdio.h>
 #include<stdlib.h>
+#include<stdio.h>
 #include<stdbool.h>
 #include<assert.h>
 
@@ -21,11 +21,24 @@ Tree* newTree() {
 }
 
 void destroy(Node *root) {
-    if (root != NULL){
+    if (root != NULL) {
         destroy(root->leftNode);
         destroy(root->rightNode);
         free(root);
     }
+}
+
+void print(Node *root) {
+    if (root == NULL) {
+        printf("null");
+        return;
+    }
+
+    printf("(");
+    print(root->leftNode);
+    printf(" %d ", root->data);
+    print(root->rightNode);
+    printf(")");
 }
 
 bool isEmpty(Tree *tree) {
@@ -81,6 +94,8 @@ int main() {
     insertLeft(tree, 50, tree->root->rightNode);
     insertLeft(tree, 5, tree->root);
 
+    printf("\n");
+    print(tree->root);
     destroy(tree->root);
     if (isEmpty(tree)) {
         printf("%s\n", "Árvore está vazia!");
