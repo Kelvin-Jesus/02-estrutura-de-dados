@@ -73,12 +73,39 @@ class ArvoreBinaria:
 
         return self.buscarNo(elemento, raiz.filhoDireito)
 
-a = ArvoreBinaria()
-a.insereNaRaiz(Item(1))
-a.insereNaDireita(Item(3), a.raiz)
-a.insereNaEsquerda(Item(2), a.raiz)
-a.insereNaEsquerda(Item(4), a.raiz.filhoEsquerdo)
-a.insereNaDireita(Item(5), a.raiz.filhoEsquerdo)
+    def altura(self, raiz: No) -> int:
+        if raiz == None:
+            return -1
 
-a.exibe()
-print("\n",a.buscarNo(Item(1)))
+        alturaSubArvoreDireita = 1 + self.altura(raiz.filhoDireito)
+        alturaSubArvoreEsquerda = 1 + self.altura(raiz.filhoEsquerdo)
+
+        if alturaSubArvoreDireita > alturaSubArvoreEsquerda:
+            return alturaSubArvoreEsquerda
+
+        return alturaSubArvoreEsquerda
+
+    def percorrerEmPreOrdem(self, raiz: No) -> None:
+        if raiz == None:
+            return None
+
+        print(raiz.elemeto.valor, ' ', end='')
+        self.percorrerEmPreOrdem(raiz.filhoEsquerdo)
+        self.percorrerEmPreOrdem(raiz.filhoDireito)
+
+    def percorrerEmInOrdem(self, raiz: No) -> None:
+        if raiz == None:
+            return None
+
+        self.percorrerEmInOrdem(raiz.filhoEsquerdo)
+        print(raiz.elemento.valor, ' ', end='')
+        self.percorrerEmInOrdem(raiz.filhoDireito)
+
+    def percorrerEmPosOrdem(self, raiz: No) -> None:
+        if raiz == None:
+            return None
+
+        self.percorrerEmPosOrdem(raiz.filhoEsquerdo)
+        self.percorrerEmPosOrdem(raiz.filhoDireito)
+        print(raiz.elemento.valor, ' ', end='')
+
