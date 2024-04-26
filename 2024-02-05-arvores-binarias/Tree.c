@@ -79,9 +79,36 @@ void insertLeft(Tree *tree, dataType newValue, Node *fatherNode) {
     fatherNode->leftNode = node;
 }
 
-int height(Node treeRoot) {
-    return 0;
+int height(Node *treeRoot) {
+    if (treeRoot == NULL) {
+        return -1;
+    }
+
+    int alturaSubArvoreDireita = 1 + height(treeRoot->rightNode);
+    int alturaSubArvoreEsquerda = 1 + height(treeRoot->leftNode);
+
+    if (alturaSubArvoreDireita > alturaSubArvoreEsquerda) {
+        return alturaSubArvoreDireita;
+    }
+
+    return alturaSubArvoreDireita;
 }
+
+Node* searchNode(Node *treeRoot, dataType nodeData) {
+    if (treeRoot == NULL) {
+        return NULL;
+    }
+
+    if (treeRoot->data == nodeData) {
+        return treeRoot;
+    }
+
+    if (searchNode(treeRoot->leftNode, nodeData) != NULL) {
+        return treeRoot->leftNode;
+    }
+
+    return searchNode(treeRoot->rightNode, nodeData);
+} 
 
 int main() {
     Tree *tree = newTree();
@@ -94,12 +121,13 @@ int main() {
     insertLeft(tree, 50, tree->root->rightNode);
     insertLeft(tree, 5, tree->root);
 
+    printf("%d", height(tree->root));
     printf("\n");
     print(tree->root);
     destroy(tree->root);
     if (isEmpty(tree)) {
         printf("%s\n", "Árvore está vazia!");
-    }
+    } 
 
     return 0;
 }
