@@ -13,7 +13,7 @@ class No:
 
 class ArvoreBinaria:
     def __init__(self):
-        self.raiz: No | None = None
+        self.raiz = None
 
     def estaVazia(self) -> bool:
         return self.raiz is None
@@ -44,7 +44,7 @@ class ArvoreBinaria:
 
     def _exibeNo(self, raizDaSubarvore: No) -> None:
         if raizDaSubarvore is None:
-            return ''
+            return None
 
         print('(', end='')
         self._exibeNo(raizDaSubarvore.filhoEsquerdo)
@@ -67,7 +67,7 @@ class ArvoreBinaria:
         if raiz.elemento.valor == elemento.valor:
             return raiz
 
-        noBuscado = self.buscarNo(elemento, raiz.filhoEsquerdo)
+        noBuscado: No | None = self.buscarNo(elemento, raiz.filhoEsquerdo)
         if noBuscado is not None:
             return noBuscado
 
@@ -89,7 +89,7 @@ class ArvoreBinaria:
         if raiz == None:
             return None
 
-        print(raiz.elemeto.valor, ' ', end='')
+        print(raiz.elemento.valor, ' ', end='')
         self.percorrerEmPreOrdem(raiz.filhoEsquerdo)
         self.percorrerEmPreOrdem(raiz.filhoDireito)
 
