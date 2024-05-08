@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class No:
-    valor: int | str   
+    valor: int 
     filhoEsquerdo: No | None = None
     filhoDireito: No | None = None
 
